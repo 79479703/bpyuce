@@ -62,7 +62,8 @@ input_data = pd.DataFrame([inputs])
 if st.button("预测产蛋量"):
     try:
         prediction = model.predict(input_data)
-        st.success(f"预测产蛋量: {prediction[0]:.2f} 枚")
+        prediction_int = int(round(prediction[0]))  # 四舍五入取整
+        st.success(f"预测产蛋量: {prediction_int} 枚")
 
         # 使用KernelExplainer替代DeepExplainer
         explainer = shap.KernelExplainer(model.predict, input_data)
